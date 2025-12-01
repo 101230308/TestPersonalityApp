@@ -10,14 +10,23 @@ class ResultsScreen extends StatelessWidget {
     super.key,
   });
   Personality getResult() {
-    List<int> scores = [0, 0, 0, 0];
+    Map<Personality, int> scores = {
+      Personality.values[0]: 0,
+      Personality.values[1]: 0,
+      Personality.values[2]: 0,
+      Personality.values[3]: 0,
+    };
     for (int i = 0; i < chosenAnswers.length; i++) {
       int index = chosenAnswers[i];
-      scores[index]++;
+      Personality p = Personality.values[index];
+      scores[p] = scores[p]! + 1;
     }
     int highestScore = 0;
+
     for (int i = 0; i < scores.length; i++) {
-      if (scores[i] > scores[highestScore]) {
+      Personality current = Personality.values[i];
+
+      if (scores[current]! > scores[Personality.values[highestScore]]!) {
         highestScore = i;
       }
     }
